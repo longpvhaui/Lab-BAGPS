@@ -1,0 +1,108 @@
+/* Mobile width < 740 px; */
+@media screen and (max-width : 739px) {
+    .container-fluid {
+        margin: 0;
+    }
+    .phone-button{
+        width: 32px !important;
+        height: 32px !important;
+        .phone {
+           
+            display: none;
+        }
+        .dropdown-select p {
+            display: none;
+        }
+    }
+}
+
+/* 		Tablet width >= 740 and width <1024px */
+@media screen and (min-width:740px) and (max-width:1023px) {
+    .phone-button{
+        width: 32px !important;
+        height: 32px !important;
+        .phone {
+           
+            display: none;
+        }
+        .dropdown-select p {
+            display: none;
+        }
+    }
+    .dropdown-select p {
+        display: none;
+    }
+}
+
+@media screen and (min-width:1024px) {
+
+}
+
+.phone-button {
+	border-radius: 2rem;
+	color: #2ca4e9;
+	border: solid 1.2px transparent;
+	background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0)), linear-gradient(101deg, #2ca4e9, #a4cfec);
+	background-origin: border-box;
+	background-clip: content-box, border-box;
+	box-shadow: 2px 1000px 1px #fff inset;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px 15px 5px 15px;
+	margin-right: 10px;
+	height: 2rem;
+
+    i {
+        font-size: 15px;
+    }
+    .phone {
+        font-size: 13px;
+	    font-weight: 500;
+	    margin-left: 10px;
+    }
+    &:hover{
+        box-shadow: none;
+	color: #fff;
+    }
+}
+
+.nav-item {
+    .nav-link{
+        padding: 10px 20px !important;
+    }
+   
+    a {
+        color: #0959a0 !important;
+    }
+}
+.phone-button {
+    margin-right: 10px;
+}
+.dropdown{
+    .dropdown-custom {
+        height: 45px;
+        background-color: #fff !important;
+        border: none !important;
+    }
+    .dropdown-select {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        img {
+            margin-right: 0.5rem;
+            border-radius: 1rem;
+        }
+        p {
+            color: #0959a0;
+            font-weight: 500;
+            font-size: 13px;
+            padding-top: 5px;
+        }
+    }
+    .dropdown-item{
+        a{
+            margin-left: 0;
+        }
+    }
+}

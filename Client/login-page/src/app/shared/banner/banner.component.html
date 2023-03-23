@@ -1,0 +1,75 @@
+<div class="slider">
+    <div class="slide" [ngStyle]="{ 'background-image': getCurrentSlideUrl(),
+                    'min-height' : '650px' }">
+        <div class="dotsContainer">
+            <ng-container *ngFor="let slide of slides; let slideIndex = index">
+                <div class="dot" *ngIf="slide.IsActived == 1 && slide.IsDeleted == 0 && slide.TypeOfNews == 1"
+                    (click)="handleDot(slide)">
+
+                    <button class="btn-dot"></button>
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="row content">
+    
+                <div class="col-news col-lg-6 order-lg-1 order-md-2 order-sm-2">
+                    <div class="details-news">
+                        <div class="text-news">
+                            <h6>{{title}}</h6>
+                            <p>{{content}}</p>
+                        </div>
+                        <button class="btn-news" type="button">
+                            {{ 'login.button-details' | translate }}   
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="container-form col-lg-6 order-lg-2 order-md-1 order-sm-1">
+                    <form class="form-signin">
+                        <div class="text-center">
+                            <img class="img-login" src="assets/imgs/logo.jpg" height="80px">
+                        </div>
+                        <div class="form-group">
+                            <div class="field-input">
+                              <span class="input-item">
+                                <i class="bi bi-person-circle"></i>
+                              </span>
+                              <input class="form-input" id="txtUserName" type="text" placeholder=" {{ 'login.username' | translate }}   " [(ngModel)]="username" name="username"  required>
+                            </div>
+                           
+                            <div class="field-input">
+                              <span class="input-item">
+                                <i class="bi bi-key"></i>
+                              </span>
+                              <input class="form-input" [type]="passShow ? 'text' : 'password'" [(ngModel)]="password" placeholder=" {{ 'login.password' | translate }}   " name="password" id="txtPassword"  required>
+                              <span>
+                                <i class="bi bi-eye-fill" aria-hidden="true" type="button" id="eye" (click)="togglePasswordShow()"></i>
+                              </span>
+                              
+                            </div>
+                          </div>
+                        <div class="form-group form-check">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" name="remember">
+                                <p> {{ 'login.remember' | translate }}   </p>
+                            </label>
+                            <label class="form-check-label forget-password">
+                                <a href="#">{{ 'login.forgetpass' | translate }}  </a>
+                            </label>
+                        </div>
+                        <button type="submit"  class="btn btn-primary btn-login" (click)="login($event)">
+                            <p>{{ 'login.login' | translate }}  </p>
+                        </button>
+                        <div class="qr-code">
+                            <img src="assets/imgs/QR.png">
+                            <p id="scanQR">{{ 'login.install' | translate }}  </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+    </div>
+
+</div>

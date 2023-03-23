@@ -1,0 +1,17 @@
+D:\Long\LabUserManage\Service\UserManageBE\Repository\bin\Debug\net6.0\Repository.deps.json
+D:\Long\LabUserManage\Service\UserManageBE\Repository\bin\Debug\net6.0\Repository.runtimeconfig.json
+D:\Long\LabUserManage\Service\UserManageBE\Repository\bin\Debug\net6.0\Repository.dll
+D:\Long\LabUserManage\Service\UserManageBE\Repository\bin\Debug\net6.0\Repository.pdb
+D:\Long\LabUserManage\Service\UserManageBE\Repository\bin\Debug\net6.0\Domain.dll
+D:\Long\LabUserManage\Service\UserManageBE\Repository\bin\Debug\net6.0\Domain.pdb
+D:\Long\LabUserManage\Service\UserManageBE\Repository\obj\Debug\net6.0\Repository.csproj.AssemblyReference.cache
+D:\Long\LabUserManage\Service\UserManageBE\Repository\obj\Debug\net6.0\Repository.GeneratedMSBuildEditorConfig.editorconfig
+D:\Long\LabUserManage\Service\UserManageBE\Repository\obj\Debug\net6.0\Repository.AssemblyInfoInputs.cache
+D:\Long\LabUserManage\Service\UserManageBE\Repository\obj\Debug\net6.0\Repository.AssemblyInfo.cs
+D:\Long\LabUserManage\Service\UserManageBE\Repository\obj\Debug\net6.0\Repository.csproj.CoreCompileInputs.cache
+D:\Long\LabUserManage\Service\UserManageBE\Repository\obj\Debug\net6.0\Repository.csproj.CopyComplete
+D:\Long\LabUserManage\Service\UserManageBE\Repository\obj\Debug\net6.0\Repository.dll
+D:\Long\LabUserManage\Service\UserManageBE\Repository\obj\Debug\net6.0\refint\Repository.dll
+D:\Long\LabUserManage\Service\UserManageBE\Repository\obj\Debug\net6.0\Repository.pdb
+D:\Long\LabUserManage\Service\UserManageBE\Repository\obj\Debug\net6.0\Repository.genruntimeconfig.cache
+D:\Long\LabUserManage\Service\UserManageBE\Repository\obj\Debug\net6.0\ref\Repository.dll

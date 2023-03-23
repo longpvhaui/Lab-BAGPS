@@ -1,0 +1,12 @@
+D:\Long\LabUserManage\Service\UserManageBE\Domain\bin\Debug\net6.0\Domain.deps.json
+D:\Long\LabUserManage\Service\UserManageBE\Domain\bin\Debug\net6.0\Domain.dll
+D:\Long\LabUserManage\Service\UserManageBE\Domain\bin\Debug\net6.0\Domain.pdb
+D:\Long\LabUserManage\Service\UserManageBE\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+D:\Long\LabUserManage\Service\UserManageBE\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Long\LabUserManage\Service\UserManageBE\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+D:\Long\LabUserManage\Service\UserManageBE\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+D:\Long\LabUserManage\Service\UserManageBE\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+D:\Long\LabUserManage\Service\UserManageBE\Domain\obj\Debug\net6.0\Domain.dll
+D:\Long\LabUserManage\Service\UserManageBE\Domain\obj\Debug\net6.0\refint\Domain.dll
+D:\Long\LabUserManage\Service\UserManageBE\Domain\obj\Debug\net6.0\Domain.pdb
+D:\Long\LabUserManage\Service\UserManageBE\Domain\obj\Debug\net6.0\ref\Domain.dll

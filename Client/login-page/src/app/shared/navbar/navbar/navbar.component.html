@@ -1,0 +1,71 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img class="logo-img" src="assets/imgs/logo.jpg" height="70px">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav  align-items-center m-auto ">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="https://bagps.vn/">{{ 'menu.home' | translate }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://bagps.vn/san-pham-va-giai-phap">{{ 'menu.product' | translate }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://bagps.vn/tin-tuc-c10">{{ 'menu.news' | translate }}</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="https://bagps.vn/huong-dan-dong-phi-dich-vu-ba-gps-d610">{{ 'menu.cost' | translate }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://badoc.bagroup.vn/display/GPS/1.+HDSD+WEB+GPS">{{ 'menu.instruct' | translate }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://bagps.vn/mang-luoi">{{ 'menu.network' | translate }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://bagps.vn/gioi-thieu/">{{ 'menu.about' | translate }}</a>
+                </li>
+            </ul>
+            <div class="d-flex align-items-center justify-content-center">
+                <button class="phone-button">
+                    <i class="bi bi-telephone-fill"></i>
+                    <span class="phone"> 1900 6464</span>
+                </button>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle dropdown-custom" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="dropdown-select">
+                            <img [src]="currentImg" width="32px" height="32px">
+                            <p>{{currentLanguage}}</p>
+                        </div>
+                    </button>
+                    <ul class="dropdown-menu" id="myDropDown">
+                        <li><a class="dropdown-item" href="#" (click)="selectedValue('vn')">
+                                <div class="dropdown-select">
+                                    <img src="assets/imgs/covn.png" width="32px" height="32px">
+                                    <p>Tiếng Việt</p>
+                                </div>
+                            </a></li>
+                        <li><a class="dropdown-item" href="#" (click)="selectedValue('en')">
+                                <div class="dropdown-select">
+                                    <img src="assets/imgs/coanh.png" width="32px" height="32px">
+                                    <p>English</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <select [(ngModel)]="selectedValue" style="display:none">
+                        <option value="vn">Tiếng Việt</option>
+                        <option value="en">Tiếng Anh</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

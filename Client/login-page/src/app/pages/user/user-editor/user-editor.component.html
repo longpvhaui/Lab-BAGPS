@@ -1,0 +1,48 @@
+<div class="p-3 m-0 border-0">
+    <div class="form-group row g-3">
+        
+        <div class="col-md-6">
+            <label for="inputName" class="col-sm-2 col-form-label">Họ và tên </label>
+            <input type="text" [(ngModel)]="user.name" class="form-control" id="txtName">
+        </div>
+
+        <div class="col-md-6">
+            <label for="inputName" class="col-sm-2 col-form-label">Tên đăng nhập </label>
+            <input type="text" [(ngModel)]="user.loginName" class="form-control" id="txtLogName">
+        </div>
+
+        <div class="col-md-6" *ngIf="user.id == 0">
+            <label for="inputName" class="col-sm-2 col-form-label">Mật khẩu </label>
+            <input type="text" [(ngModel)]="user.password" class="form-control" id="txtPassword">
+        </div>
+
+        <div class="col-md-6">
+            <label for="inputGender" class="col-sm-2 col-form-label">Giới tính</label>
+            <select  class="form-select" [(ngModel)]="user.gender">
+                <option  [value]="0">Nam</option>
+                <option  [value]="1">Nữ</option>
+              </select>
+        </div>
+        <div class="col-md-6">
+            <label for="inputGender" class="col-sm-2 col-form-label">Ngày sinh</label>
+            <input type="date" [(ngModel)]="user.birthday" class="form-control" id="txtBirthday" >
+        </div>
+        <div class="col-md-6">
+            <label for="inputPhone" class="col-sm-2 col-form-label">Điện thoại</label>
+            <input type="text" [(ngModel)]="user.phone" class="form-control" id="txtPhone">
+        </div>
+
+        <div class="col-md-6">
+            <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
+            <input type="email" [(ngModel)]="user.email" class="form-control" id="txtEmail">
+        </div>
+        <div class="col-md-6 " >
+            <label for="inputIsAdmin" class="col-sm-2 col-form-label">
+                Tài khoản Admin
+            </label>
+            <input type="checkbox" [(ngModel)]="user.isAdmin" class="form-check" id="cbIsAdmin">
+        </div>
+    </div>
+</div>
+    <button (click)="addUser()" *ngIf="user.id == 0" class="btn btn-primary btn-save">Add</button>
+    <button (click)="editUser()" *ngIf="user.id != 0" class="btn btn-primary btn-save">Update</button>

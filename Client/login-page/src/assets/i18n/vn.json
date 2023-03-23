@@ -1,0 +1,20 @@
+{
+    "menu": {
+      "home": "Trang chủ",
+      "product": "Sản phẩm",
+      "news": "Tin tức",
+      "cost": "Đóng phí",
+      "instruct": "Hướng dẫn",
+      "network": "Mạng lưới",
+      "about":"Về chúng tôi"
+    },
+    "login":{
+      "button-details":"Chi tiết",
+      "username":"Tên tài khoản",
+      "password":"Mật khẩu",
+      "remember": "Nhớ đăng nhập",
+      "forgetpass": "Quên mật khẩu",
+      "login":"Đăng nhập",
+      "install":"Quét mã QR để cài đặt"
+    }
+  }

@@ -1,0 +1,20 @@
+{
+    "menu": {
+      "home": "Home",
+      "product": "Product",
+      "news": "News",
+      "cost": "Cost",
+      "instruct": "Instruct",
+      "network": "Network",
+      "about":"About"
+    },
+    "login":{
+      "button-details":"Details",
+      "username":"User name",
+      "password":"Password",
+      "remember": "Remember",
+      "forgetpass": "Forget Password",
+      "login":"Login",
+      "install":"Scan QR code to install"
+    }
+  }
