@@ -1,4 +1,5 @@
 ﻿using Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace UserManageBE.Controllers
             _userService = userService;   
         }
 
+        [Authorize]
         [HttpGet]
         [Route("get-all")]
         public IActionResult GetAll() 
@@ -27,6 +29,7 @@ namespace UserManageBE.Controllers
             return Ok(users);
         }
 
+        [Authorize]
         [HttpGet]
         [Route("get-pagging")]
         public IActionResult GetPagging(string searchText, int pageNumber, int pageSize, int gender, string fromDate, string toDate) 
@@ -39,6 +42,7 @@ namespace UserManageBE.Controllers
             return Ok(user);
         }
 
+        [Authorize]
         [HttpPost]
         [Route("add")]
         public  IActionResult AddUser(User user)
@@ -50,6 +54,8 @@ namespace UserManageBE.Controllers
             _userService.InsertUser(user);
             return Ok();
         }
+
+        [Authorize]
         [HttpPost]
         [Route("edit")]
         public IActionResult EditUser(User user)
@@ -71,6 +77,8 @@ namespace UserManageBE.Controllers
                 return Ok();
             }else return BadRequest();
         }
+
+        [Authorize]
         [HttpDelete]
         [Route("delete")]
         public IActionResult DeleteUser(int id)

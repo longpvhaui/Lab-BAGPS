@@ -9,15 +9,16 @@ export class UserEditorComponent implements OnInit {
 
   @Input() user:any;
   birthdayFormat!:string;
+
   constructor(){
 
   }
   ngOnInit(): void {
-
+    
   }
   editUser(){
 
-  }
+  } 
   addUser(){
     
   }
