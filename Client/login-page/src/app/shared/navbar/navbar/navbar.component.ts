@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthenService } from '../../services/authen.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
+export class NavbarComponent  implements OnInit {
   currentImg!: string;
   currentLanguage!: string;
-  constructor(private translate: TranslateService){
+  showNavbar: boolean = true;
+  showLogout:boolean = false;
+  constructor(private translate: TranslateService,private authen : AuthenService){
     var lang = localStorage.getItem('lang');
     if(!lang) 
     {
@@ -29,7 +32,14 @@ export class NavbarComponent {
     }else this.currentLanguage = langText;
     
   }
-
+  ngOnInit():void{
+    debugger
+    if(this.authen.isLogin) {
+      console.log('long',this.authen.isLogin)
+      this.showLogout = true;
+      this.showNavbar = false;
+    }
+  }
   selectedValue(lang:any)
   {
     if (lang === 'vn') {

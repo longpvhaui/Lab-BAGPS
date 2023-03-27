@@ -40,15 +40,19 @@ namespace UserManageBE.Controllers
                     var secretKey = Encoding.UTF8.GetBytes(secretAppsettings);
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {
-                        Subject = new ClaimsIdentity(new[] { new Claim("id", userLogin.Id.ToString()) }),
+                        Subject = new ClaimsIdentity(new[] { new Claim("id",userLogin.Id.ToString()) }),
                         Expires = DateTime.UtcNow.AddMinutes(30),
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature)
                     };
                     var token = tokenHandler.CreateToken(tokenDescriptor);
-                    return Ok(tokenHandler.WriteToken(token));
+                    var response = new { token = tokenHandler.WriteToken(token) };
+                    return Ok(response);
+                }else
+                {
+                    return Ok("Username or Password is incorrect");
                 }
-            }
-            return Unauthorized();
+            }   
+ 
         }
     }
 }

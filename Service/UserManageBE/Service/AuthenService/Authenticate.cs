@@ -22,7 +22,8 @@ namespace Service.AuthenService
         public User CheckLogin(LoginModel loginModel)
         {
             var users =  _userService.GetUsers();
-            var user = users.Where(x => x.LoginName == loginModel.LoginName && x.Password == _md5.EncryptPassword(loginModel.Password)).FirstOrDefault();
+            var pass = _md5.EncryptPassword(loginModel.Password);
+            var user = users.Where(x => x.LoginName == loginModel.LoginName && x.Password == pass).FirstOrDefault();
             if (user != null) return user;
             else return null;
         }

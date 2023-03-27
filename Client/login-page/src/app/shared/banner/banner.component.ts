@@ -2,7 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { interval } from 'rxjs';
+import { AuthenService } from '../services/authen.service';
 
 @Component({
   selector: 'app-banner',
@@ -81,7 +83,7 @@ export class BannerComponent implements OnInit {
       passWord: '123'
     }
   ]
-  constructor(private route: Router,private translate: TranslateService) {
+  constructor(private route: Router,private translate: TranslateService,private authen : AuthenService,private toastr: ToastrService) {
     var lang = localStorage.getItem('lang');
     if(!lang) 
     {
@@ -119,20 +121,34 @@ export class BannerComponent implements OnInit {
   togglePasswordShow() {
     this.passShow = !this.passShow;
   }
-  login(e: any) {
+  async login(e: any) {
+
     if (this.username === '' || this.password === '') {
       alert('Không được bỏ trống tài khoản hoặc mật khẩu')
       return
     }
-    var user = this.users.find(x=>x.userName === this.username && x.passWord === this.password)
-    if (user) {
-      this.route.navigate(['user'])
+    else {
+      const result = await this.authen.logIn(this.username, this.password);
+      if(result) {
+           this.route.navigate(['user']);
+           this.toastr.success(`Hi, ${this.username}`, 'Login success',{
+            closeButton :true
+          })
+        }
+        else {
+          this.toastr.error('Username or password is incorrect', 'Login fail',{
+            closeButton :true
+          })
+        }
     }
-    else alert('Tài khoản hoặc mật khẩu chưa chính xác')
   }
 
 }
-
+// var user = this.users.find(x=>x.userName === this.username && x.passWord === this.password)
+    // if (user) {
+    //   this.route.navigate(['user'])
+    // }
+    // else alert('Tài khoản hoặc mật khẩu chưa chính xác')
 
 export class Slide {
   id!: number;

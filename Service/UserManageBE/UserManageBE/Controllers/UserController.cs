@@ -1,5 +1,5 @@
 ﻿using Domain.Models;
-using Microsoft.AspNetCore.Authorization;
+using Infrastructure.Authorize;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
