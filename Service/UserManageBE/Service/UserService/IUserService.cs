@@ -7,14 +7,21 @@ using System.Threading.Tasks;
 
 namespace Service.UserService
 {
+    /// <summary>
+    ///   <br />
+    /// </summary>
+    /// <Modified>
+    /// Name Date Comments
+    /// longpv 3/30/2023 created
+    /// </Modified>
     public interface IUserService
     {
         IEnumerable<User> GetUsers();
         User GetUser(int id);
-        void InsertUser(User user);
-        void UpdateUser(User user);
-        void DeleteUser(int id);
-        IEnumerable<User> GetPaggingAndSearch(string searchText, int pageNumber, int pageSize, int gender, DateTime? fromDate, DateTime? toDate);
+        User InsertUser(User user);
+        User UpdateUser(User user);
+        User DeleteUser(int id);
+        IEnumerable<User> GetPaggingAndSearch(SearchModel model);
 
     }
 }

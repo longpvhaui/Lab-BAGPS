@@ -39,8 +39,7 @@ builder.Services.AddSwaggerGen(c =>
                     }
                 });
 });
-builder.Services.AddDbContext<UserManageDbContext>(options =>
-            options.UseSqlServer(builder.Configuration.GetConnectionString("UserManageConnectionString")));
+builder.Services.AddDbContext<UserManageDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("UserManageConnectionString")));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddScoped<IMD5Encrypt, MD5Encrypt>();

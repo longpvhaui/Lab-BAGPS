@@ -6,6 +6,13 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Infrastructure.Authorize
 {
+    /// <summary>
+    ///   <br />
+    /// </summary>
+    /// <Modified>
+    /// Name Date Comments
+    /// longpv 3/30/2023 created
+    /// </Modified>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class AuthorizeAttribute : Attribute, IAuthorizationFilter
     {

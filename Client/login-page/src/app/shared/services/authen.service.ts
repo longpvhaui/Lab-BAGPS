@@ -1,8 +1,8 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router } from "@angular/router";
-import { Observable } from "rxjs/internal/Observable";
-import { map } from "rxjs/internal/operators/map";
+import { environment } from "src/environments/environment";
+
 
 export class UserLogin  {
   loginName!:string;
@@ -14,7 +14,8 @@ const defaultPath = '';
 })
 export class AuthenService {
     
-    user!: UserLogin | null;
+    user!: UserLogin;
+    isAdmin!:boolean;
     currAcc!: string;
     private readonly JWT_TOKEN = 'JWT_TOKEN';
     isLogin: boolean = false;
@@ -22,24 +23,26 @@ export class AuthenService {
         return !!this.user;  //ép kiểu về boolean
     }
 
-    private _lastAuthenticatedPath:string = defaultPath;
-    set lastAuthenticatedPath(value:string){
-        this._lastAuthenticatedPath = value;
+    private _lastAuthenticatedPath: string = defaultPath;
+    set lastAuthenticatedPath(value: string) {
+      this._lastAuthenticatedPath = value;
+
     }
+
     constructor(private router: Router, private http: HttpClient){}
     async logIn(username: string, password: string): Promise<boolean>{
       localStorage.removeItem(this.JWT_TOKEN);
+      localStorage.removeItem('user');
       const userLogin = {
           'loginName': username,
           'password' : password
         }
-        var url = `${apiUrl}`+ 'login';
+        var url = `${environment.apiUrl}`+ '/api/Auth/login';
         try{
         var res =  await this.http.post<any>(url, userLogin).toPromise();
         if(res.token){
-                this.user = {
-                 'loginName': username
-                }
+                this.user = res.user;
+                this.isAdmin = res.user.isAdmin;
                 this.router.navigate([this._lastAuthenticatedPath]);
                 localStorage.setItem(this.JWT_TOKEN,res.token);
                 this.currAcc = res.token;
@@ -57,7 +60,7 @@ export class AuthenService {
 
       logOut()
       {
-        this.user = null,
+        
         localStorage.removeItem(this.JWT_TOKEN);
         this.router.navigate(['/home']);
       }
@@ -85,6 +88,7 @@ export class AuthGuardService implements CanActivate {
     
         if (isLoggedIn) {
           this.authService.lastAuthenticatedPath = route.routeConfig?.path || defaultPath;
+      
         }
     
         return isLoggedIn || isAuthForm;

@@ -23,6 +23,15 @@ namespace UserManageBE.Controllers
             _configuration = configuration;
         }
 
+        /// <summary>Logins the specified model.</summary>
+        /// <param name="model">The model.</param>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginModel model)
         {
@@ -41,11 +50,14 @@ namespace UserManageBE.Controllers
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {
                         Subject = new ClaimsIdentity(new[] { new Claim("id",userLogin.Id.ToString()) }),
-                        Expires = DateTime.UtcNow.AddMinutes(30),
+                        Expires = DateTime.UtcNow.AddMinutes(1),
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature)
                     };
                     var token = tokenHandler.CreateToken(tokenDescriptor);
-                    var response = new { token = tokenHandler.WriteToken(token) };
+                    var tokenResponse = tokenHandler.WriteToken(token) ;
+                    var response = new ResponseAuthen();
+                    response.User = userLogin;
+                    response.Token = tokenResponse;
                     return Ok(response);
                 }else
                 {

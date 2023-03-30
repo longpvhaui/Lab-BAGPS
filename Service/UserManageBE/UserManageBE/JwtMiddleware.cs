@@ -6,6 +6,13 @@ using System.Text;
 
 namespace UserManageBE
 {
+    /// <summary>
+    ///   <br />
+    /// </summary>
+    /// <Modified>
+    /// Name Date Comments
+    /// longpv 3/30/2023 created
+    /// </Modified>
     public class JwtMiddleware
     {
         private readonly RequestDelegate _next;
@@ -17,6 +24,13 @@ namespace UserManageBE
             _configuration = configuration;
         }
 
+        /// <summary>Invokes the specified context.</summary>
+        /// <param name="context">The context.</param>
+        /// <param name="userService">The user service.</param>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
         public async Task Invoke(HttpContext context, IUserService userService)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(' ').Last();
@@ -27,6 +41,14 @@ namespace UserManageBE
         }
 
 
+        /// <summary>Attaches the user to context.</summary>
+        /// <param name="context">The context.</param>
+        /// <param name="userService">The user service.</param>
+        /// <param name="token">The token.</param>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
         private void AttachUserToContext(HttpContext context, IUserService userService, string token)
         {
             try

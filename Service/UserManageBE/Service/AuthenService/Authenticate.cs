@@ -10,6 +10,16 @@ using System.Threading.Tasks;
 
 namespace Service.AuthenService
 {
+    /// <summary>
+    ///   <para>Authenticate Service</para>
+    ///   <para>
+    ///     <br />
+    ///   </para>
+    /// </summary>
+    /// <Modified>
+    /// Name Date Comments
+    /// longpv 3/30/2023 created
+    /// </Modified>
     public class Authenticate : IAuthenticate
     {
         private readonly IUserService _userService;
@@ -19,7 +29,16 @@ namespace Service.AuthenService
             _userService = userService;
             _md5 = md5;
         }
-        public User CheckLogin(LoginModel loginModel)
+        /// <summary>Kiểm tra đăng nhập</summary>
+        /// <param name="loginModel">The login model.</param>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
+        public User? CheckLogin(LoginModel loginModel)
         {
             var users =  _userService.GetUsers();
             var pass = _md5.EncryptPassword(loginModel.Password);

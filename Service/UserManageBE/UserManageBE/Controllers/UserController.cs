@@ -29,32 +29,57 @@ namespace UserManageBE.Controllers
             return Ok(users);
         }
 
+        /// <summary>Tìm kiếm</summary>
+        /// <param name="model">The model.</param>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
         [Authorize]
-        [HttpGet]
+        [HttpPost]
         [Route("get-pagging")]
-        public IActionResult GetPagging(string searchText, int pageNumber, int pageSize, int gender, string fromDate, string toDate) 
+        public IActionResult GetPagging(SearchModel model) 
         {
-            var fromBirthDate = new DateTime();
-            var toBirthDate = new DateTime();
-            fromBirthDate = DateTime.Parse(fromDate);
-            toBirthDate = DateTime.Parse(toDate);
-            var user = _userService.GetPaggingAndSearch(searchText, pageNumber, pageSize, gender, fromBirthDate, toBirthDate);
+        
+            var user = _userService.GetPaggingAndSearch(model);
             return Ok(user);
         }
 
+        /// <summary>Thêm nhân viên</summary>
+        /// <param name="user">The user.</param>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
         [Authorize]
         [HttpPost]
         [Route("add")]
         public  IActionResult AddUser(User user)
         {
+            user.CreatedDate = DateTime.Now;
             if(user == null)
             {
                 return BadRequest();
             }
-            _userService.InsertUser(user);
-            return Ok();
+            var result  = _userService.InsertUser(user);
+            return Ok(result);
         }
 
+        /// <summary>Cập nhật nhân viên</summary>
+        /// <param name="user">The user.</param>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
         [Authorize]
         [HttpPost]
         [Route("edit")]
@@ -70,14 +95,22 @@ namespace UserManageBE.Controllers
                 currUser.LoginName = user.LoginName;
                 currUser.Password = user.Password;
                 currUser.Name = user.Name;
+                currUser.Gender = user.Gender;
                 currUser.Email = user.Email;
                 currUser.Birthday = user.Birthday;
                 currUser.Phone = user.Phone;
-                _userService.UpdateUser(currUser);
-                return Ok();
+                var result = _userService.UpdateUser(currUser);
+                return Ok(result);
             }else return BadRequest();
         }
 
+        /// <summary>Xóa nhân viên</summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns></returns>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
         [Authorize]
         [HttpDelete]
         [Route("delete")]
@@ -86,9 +119,44 @@ namespace UserManageBE.Controllers
             var currUser = _userService.GetUser(id);
             if(currUser != null)
             {
-                _userService.DeleteUser(currUser.Id);
-                return Ok();
+                var result = _userService.DeleteUser(currUser.Id);
+                return Ok(result);
             }else return NotFound();
+
+        }
+
+
+        /// <summary>Xóa nhiều nhân viên 1 lúc</summary>
+        /// <param name="ids">The ids.</param>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
+        [Authorize]
+        [HttpPost]
+        [Route("delete-multi")]
+        public IActionResult DeleteMultiUser(int[] ids)
+        {
+            var isSuccess = false;
+            foreach (var userId in ids)
+            {
+                var currUser = _userService.GetUser(userId);
+                if (currUser != null)
+                {
+                    var result = _userService.DeleteUser(currUser.Id);
+                   if(result != null) { isSuccess = true; }
+                   else { isSuccess = false; }
+                }
+                else isSuccess = false;
+            }
+            if (isSuccess)
+            {
+                return Ok();
+            }else return BadRequest();
+        
 
         }
     }

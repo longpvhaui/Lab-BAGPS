@@ -20,6 +20,7 @@ import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { AuthenService, AuthGuardService } from './shared/services/authen.service';
 import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    NgxPaginationModule,
     ToastrModule.forRoot(),
     ToastNoAnimationModule.forRoot(),
     TranslateModule.forRoot({

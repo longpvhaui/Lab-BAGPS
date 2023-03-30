@@ -1,3 +1,20 @@
 .btn-save{
     float: right;
 }
+.eye-show {
+    background: #fff;
+    color: #333;
+    width: 10px;
+    height: 10px;
+
+    margin-top: 6px;
+    margin-right: 10px;
+
+    border-radius: 0px 5px 5px 0px;
+    float: right;
+    position: relative;
+    right: 1%;
+    top: -36%;
+    z-index: 5;
+    cursor: pointer;
+}

@@ -12,6 +12,7 @@ export class NavbarComponent  implements OnInit {
   currentLanguage!: string;
   showNavbar: boolean = true;
   showLogout:boolean = false;
+
   constructor(private translate: TranslateService,private authen : AuthenService){
     var lang = localStorage.getItem('lang');
     if(!lang) 
@@ -33,12 +34,7 @@ export class NavbarComponent  implements OnInit {
     
   }
   ngOnInit():void{
-    debugger
-    if(this.authen.isLogin) {
-      console.log('long',this.authen.isLogin)
-      this.showLogout = true;
-      this.showNavbar = false;
-    }
+  
   }
   selectedValue(lang:any)
   {

@@ -1,48 +1,127 @@
 <div class="p-3 m-0 border-0">
+    <form #userForm = "ngForm" (ngSubmit)="onSubmit(userForm)">
     <div class="form-group row g-3">
-        
         <div class="col-md-6">
-            <label for="inputName" class="col-sm-2 col-form-label">Họ và tên </label>
-            <input type="text" [(ngModel)]="user.name" class="form-control" id="txtName">
+            <label for="inputName" class="col-sm-2 col-form-label">Họ và tên * </label>
+            <input type="text" [(ngModel)]="user.name" class="form-control" id="txtName" name="name" required maxlength="200" pattern="[^\s]{1,200}">
+            <div *ngIf="checksubmit && userForm.controls['name'].invalid" class="alert alert-danger"> 
+                <div *ngIf="userForm.controls['name']?.errors?.['required']">
+                    Họ tên bắt buộc
+                  </div>
+                  <div *ngIf="userForm.controls['name']?.errors?.['pattern']">
+                    Họ tên sai định dạng
+                  </div>
+                  <div *ngIf="userForm.controls['name']?.errors?.['maxlength']">
+                    Họ tên quá dài
+                  </div>
+            </div>
         </div>
 
         <div class="col-md-6">
-            <label for="inputName" class="col-sm-2 col-form-label">Tên đăng nhập </label>
-            <input type="text" [(ngModel)]="user.loginName" class="form-control" id="txtLogName">
+            <label for="inputLoginName" class="col-sm-3 col-form-label">Tên đăng nhập * </label>
+            <input type="text" [(ngModel)]="user.loginName" class="form-control" id="txtLogName" name="loginName" required pattern="[^\s]{1,50}" maxlength="50">
+            <div *ngIf="checksubmit && userForm.controls['loginName'].invalid" class="alert alert-danger"> 
+                <div *ngIf="userForm.controls['loginName']?.errors?.['required']">
+                 Tên đăng nhập bắt buộc
+                  </div>
+                  <div *ngIf="userForm.controls['loginName']?.errors?.['pattern']">
+                    Tên đăng nhập sai định dạng
+                  </div>
+                  <div *ngIf="userForm.controls['loginName']?.errors?.['maxlength']">
+                    Tên đăng nhập quá dài
+                  </div>
+            </div>
         </div>
 
         <div class="col-md-6" *ngIf="user.id == 0">
-            <label for="inputName" class="col-sm-2 col-form-label">Mật khẩu </label>
-            <input type="text" [(ngModel)]="user.password" class="form-control" id="txtPassword">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Mật khẩu </label>
+            <input [type]="passShow ? 'text' : 'password'" [(ngModel)]="user.password" class="form-control" id="txtPassword" name="password" required minlength="6" maxlength="100" pattern="[^\s]{1,50}" >
+            <span>
+                <i class="bi bi-eye-fill eye-show" aria-hidden="true" type="button"  (click)="togglePasswordShow()"></i>
+              </span>
+            <div *ngIf="checksubmit && userForm.controls['password'].invalid" class="alert alert-danger"> 
+                <div *ngIf="userForm.controls['password']?.errors?.['required']">
+                 Mật khẩu bắt buộc
+                  </div>
+                  <div *ngIf="userForm.controls['password']?.errors?.['pattern']">
+                    Mật khẩu sai định dạng
+                  </div>
+                  <div *ngIf="userForm.controls['password']?.errors?.['minlength']">
+                    Mật khẩu  phải lớn hơn 6 kí tự
+                  </div>
+                  <div *ngIf="userForm.controls['password']?.errors?.['maxlength']">
+                    Mật khẩu  quá dài
+                  </div>
+            </div>
         </div>
-
+        <div class="col-md-6" *ngIf="user.id == 0">
+            <label for="inputRePassword" class="col-sm-3 col-form-label">Nhập lại mật khẩu </label>
+            <input [type]="passShow ? 'text' : 'password'" [(ngModel)]="rePassword" class="form-control" id="txtRePassword" name="rePassword" required minlength="6" maxlength="100" pattern="[^\s]{1,50}">
+            <span>
+                <i class="bi bi-eye-fill eye-show" aria-hidden="true" type="button"  (click)="togglePasswordShow()"></i>
+              </span>
+            <div *ngIf="checksubmit && userForm.controls['rePassword'].invalid " class="alert alert-danger"> 
+                <div *ngIf="userForm.controls['rePassword']?.errors?.['required']">
+                    Mật khẩu bắt buộc
+                  </div>
+                  <div *ngIf="userForm.controls['rePassword']?.errors?.['pattern']">
+                    Mật khẩu sai định dạng
+                  </div>
+                  <div *ngIf="userForm.controls['rePassword']?.errors?.['minlength']">
+                    Mật khẩu  phải lớn hơn 6 kí tự
+                  </div>
+                  <div *ngIf="userForm.controls['rePassword']?.errors?.['maxlength']">
+                    Mật khẩu  quá dài
+                  </div>
+                 
+            </div>
+            <div *ngIf="checksubmit && incorrectPassword" class="alert alert-danger">
+                Mật khẩu không khớp
+            </div>
+        </div>
         <div class="col-md-6">
             <label for="inputGender" class="col-sm-2 col-form-label">Giới tính</label>
-            <select  class="form-select" [(ngModel)]="user.gender">
-                <option  [value]="0">Nam</option>
-                <option  [value]="1">Nữ</option>
+            <select  class="form-select" [(ngModel)]="user.gender" name="gender" required>
+                <option  value="0">Nam</option>
+                <option  value="1">Nữ</option>
               </select>
         </div>
         <div class="col-md-6">
-            <label for="inputGender" class="col-sm-2 col-form-label">Ngày sinh</label>
-            <input type="date" [(ngModel)]="user.birthday" class="form-control" id="txtBirthday" >
+            <label for="inputBirthday" class="col-sm-2 col-form-label">Ngày sinh</label>
+            <input type="date" [(ngModel)]="birthday" class="form-control" id="txtBirthday" name="birthday">
+            <div *ngIf="checksubmit && isEnoughAge === false" class="alert alert-danger"> 
+                    Không đủ 18 tuổi
+            </div>
         </div>
         <div class="col-md-6">
             <label for="inputPhone" class="col-sm-2 col-form-label">Điện thoại</label>
-            <input type="text" [(ngModel)]="user.phone" class="form-control" id="txtPhone">
+            <input type="text" [(ngModel)]="user.phone" class="form-control" id="txtPhone" name="phone" required pattern="[0-9]{0,10}">
+            <div *ngIf="checksubmit && userForm.controls['phone'].invalid " class="alert alert-danger"> 
+                <div *ngIf="userForm.controls['phone']?.errors?.['required']">
+                    Số điện thoại bắt buộc
+                  </div>
+                  <div *ngIf="userForm.controls['phone']?.errors?.['pattern']">
+                    Số điện thoại sai định dạng
+                  </div>
+            </div>
         </div>
 
         <div class="col-md-6">
             <label for="inputMail" class="col-sm-2 col-form-label">Email</label>
-            <input type="email" [(ngModel)]="user.email" class="form-control" id="txtEmail">
+            <input type="email" [(ngModel)]="user.email" class="form-control" id="txtEmail" name="email" email  >
+            <div *ngIf="checksubmit && !emailRegex " class="alert alert-danger">
+                    Email sai định dạng
+              </div>
         </div>
         <div class="col-md-6 " >
-            <label for="inputIsAdmin" class="col-sm-2 col-form-label">
+            <label for="inputIsAdmin" class="col-sm-4 col-form-label">
                 Tài khoản Admin
             </label>
-            <input type="checkbox" [(ngModel)]="user.isAdmin" class="form-check" id="cbIsAdmin">
+            <input type="checkbox" [(ngModel)]="user.isAdmin" class="form-check" id="cbIsAdmin" name="isAdmin">
         </div>
     </div>
+
+    <button  type="submit"  *ngIf="user.id == 0" class="btn btn-primary btn-save" >Add</button>
+    <button type="submit" *ngIf="user.id != 0" class="btn btn-primary btn-save">Update</button>
+</form>
 </div>
-    <button (click)="addUser()" *ngIf="user.id == 0" class="btn btn-primary btn-save">Add</button>
-    <button (click)="editUser()" *ngIf="user.id != 0" class="btn btn-primary btn-save">Update</button>

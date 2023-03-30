@@ -28,22 +28,52 @@ namespace Repository
             _context = context;
             entities = context.Set<T>();
         }
+        /// <summary>Xóa 1 bản ghi.</summary>
+        /// <param name="id">The identifier.</param>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
         public void Delete(int id)
         {
             _context.SaveChanges();
         }
 
+        /// <summary>Lấy toàn bộ dữ liệu </summary>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
         public IEnumerable<T> GetAll()
         {
             return entities.AsEnumerable();
         }
 
 
+        /// <summary>Lấy dữ liệu theo id.</summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
         public T GetById(int id)
         {
             return entities.Find(id);
         }
 
+        /// <summary>Thêm dữ liệu.</summary>
+        /// <param name="entity">The entity.</param>
+        /// <exception cref="System.ArgumentNullException">entity</exception>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
         public void Insert(T entity)
         {
             if (entity == null)
@@ -53,14 +83,13 @@ namespace Repository
             entities.Add(entity);
             _context.SaveChanges();
         }
-
-
-
-        public void SaveChanges()
-        {
-            _context.SaveChanges();
-        }
-
+        /// <summary>Cập nhật dữ liệu</summary>
+        /// <param name="entity">The entity.</param>
+        /// <exception cref="System.ArgumentNullException">entity</exception>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
         public void Update(T entity)
         {
             if (entity == null)
@@ -69,5 +98,13 @@ namespace Repository
             }
             _context.SaveChanges();
         }
+
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
+
+     
     }
 }

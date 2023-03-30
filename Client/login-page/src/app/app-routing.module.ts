@@ -5,7 +5,7 @@ import { UserComponent } from './pages/user/user.component';
 import { AuthGuardService } from './shared/services/authen.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { 
     path: 'home',
     component: HomeComponent,

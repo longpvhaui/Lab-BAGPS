@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 
 namespace Service.AuthenService
 {
+    /// <summary>
+    ///   <br />
+    /// </summary>
+    /// <Modified>
+    /// Name Date Comments
+    /// longpv 3/30/2023 created
+    /// </Modified>
     public interface IAuthenticate
     {
         User CheckLogin(LoginModel loginModel);

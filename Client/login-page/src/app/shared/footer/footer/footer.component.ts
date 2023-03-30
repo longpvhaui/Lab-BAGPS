@@ -26,6 +26,9 @@ export class FooterComponent {
     { 
       brandName : 'TP. Hồ Chí Minh',
       description : 'Số 9, Đường 3, KĐT Vạn Phúc, P Hiệp Bình Phước , TP Thủ Đức , TP Hồ Chí Minh'
+    },{ 
+      brandName : 'TP. Hồ Chí Minh long',
+      description : 'Số 9, Đường 3, KĐT Vạn Phúc, P Hiệp Bình Phước , TP Thủ Đức , TP Hồ Chí Minh'
     }
   ]
 }

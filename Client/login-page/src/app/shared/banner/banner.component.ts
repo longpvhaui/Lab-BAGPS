@@ -90,15 +90,7 @@ export class BannerComponent implements OnInit {
       localStorage.setItem('lang', 'vn');
       translate.use('vn');
     }else translate.use(lang);
-
-  }
-  ngOnInit(): void {
-    if (this.slides) {
-      this.content = this.slides[0].content;
-      this.title = this.slides[0].title;
-
-    }
-
+    
     interval(5000).subscribe(() => {
       let slideShow = this.slides.filter(x => x.IsActived === 1 && x.IsDeleted === 0 && x.TypeOfNews === 1)
       let currentSlide = slideShow.find(slide => slide.id === this.currentIndex);
@@ -109,6 +101,15 @@ export class BannerComponent implements OnInit {
       }
     });
   }
+  ngOnInit(): void {
+    if (this.slides) {
+      this.content = this.slides[0].content;
+      this.title = this.slides[0].title;
+
+    }
+  }
+   
+
   getCurrentSlideUrl() {
     return `url('${this.slides[this.currentIndex - 1].imagePath}')`;
   }
@@ -131,12 +132,12 @@ export class BannerComponent implements OnInit {
       const result = await this.authen.logIn(this.username, this.password);
       if(result) {
            this.route.navigate(['user']);
-           this.toastr.success(`Hi, ${this.username}`, 'Login success',{
+           this.toastr.success(`Hello, ${this.username}!`, 'Login success',{
             closeButton :true
           })
         }
         else {
-          this.toastr.error('Username or password is incorrect', 'Login fail',{
+          this.toastr.error('Đăng nhập thất bại', 'Login fail',{
             closeButton :true
           })
         }
