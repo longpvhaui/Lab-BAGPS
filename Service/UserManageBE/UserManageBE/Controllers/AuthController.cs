@@ -37,7 +37,7 @@ namespace UserManageBE.Controllers
         {
             var secretAppsettings = _configuration.GetValue<string>("AppSettings:SecretKey");
             var tokenHandler = new JwtSecurityTokenHandler();
-            if (model is null)
+            if (model.LoginName is null || model.Password is null)
             {
                 return BadRequest("Invalid client request");
             }
@@ -50,7 +50,7 @@ namespace UserManageBE.Controllers
                     var tokenDescriptor = new SecurityTokenDescriptor
                     {
                         Subject = new ClaimsIdentity(new[] { new Claim("id",userLogin.Id.ToString()) }),
-                        Expires = DateTime.UtcNow.AddMinutes(1),
+                        Expires = DateTime.UtcNow.AddMinutes(30),
                         SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKey), SecurityAlgorithms.HmacSha256Signature)
                     };
                     var token = tokenHandler.CreateToken(tokenDescriptor);

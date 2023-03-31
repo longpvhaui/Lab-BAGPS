@@ -36,18 +36,28 @@ namespace Service.UserService
         /// Name Date Comments
         /// longpv 3/30/2023 created
         /// </Modified>
-        public User? DeleteUser(int id)
+        public ResponseService<User> DeleteUser(int id)
         {
+            var response = new ResponseService<User>();
             User user = GetUser(id);
             if (user != null)
             {
                 user.IsDelete = true;
                 user.DeletedDate = DateTime.Now;
                 _userRepository.SaveChanges();
-                return user;
+                response.Data = user;
+                return response;
             }
-            else return null;
+            else
+            {
+                response.Success = false;
+                response.Message = "Delete Fail";
+                response.Data = null;
+                return response;
+            }
+            
         }
+
 
         /// <summary>Tìm kiếm theo tên, ngày sinh, giới tính</summary>
         /// <param name="model">The model.</param>
@@ -58,14 +68,15 @@ namespace Service.UserService
         /// Name Date Comments
         /// longpv 3/30/2023 created
         /// </Modified>
-        public IEnumerable<User> GetPaggingAndSearch(SearchModel model)
+        public ResponseUser GetUserSearch(SearchModel model)
         {
-            var users = GetUsers();
+            var response = new ResponseUser();
+            var users = GetAll();
 
             if (!string.IsNullOrEmpty(model.SearchText))
             {
                 var searchText = model.SearchText.ToLower();
-                 users = users.Where(x => x.Name.ToLower().Contains(searchText) || x.Phone.Contains(searchText) || x.Email.Contains(searchText));
+                users = users.Where(x => x.Name.ToLower().Contains(searchText) || x.Phone.Contains(searchText) || x.Email.Contains(searchText));
             }
 
             if (model.Gender is not null)
@@ -79,11 +90,18 @@ namespace Service.UserService
             }
 
             if (model.ToDate != null && DateTime.TryParseExact(model.ToDate, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out var birthTo))
-            { 
+            {
                 users = users.Where(x => x.Birthday <= birthTo);
             }
 
-            return users;
+            var userPagging = users.Skip((model.PageIndex - 1) * model.PageSize).Take(model.PageSize).ToList();
+            var totalItems = users.ToList().Count;
+            var totalPages = Math.Ceiling((double)totalItems / model.PageSize);
+            response.Users = userPagging;
+            response.TotalItems = totalItems;
+            response.TotalPages = totalPages;
+
+            return response;
         }
 
         /// <summary>
@@ -100,7 +118,7 @@ namespace Service.UserService
         /// Name Date Comments
         /// longpv 3/30/2023 created
         /// </Modified>
-        public User? GetUser(int id)
+        public User GetUser(int id)
         {
             var user = _userRepository.GetById(id);
             if(!user.IsDelete) return user;
@@ -115,11 +133,20 @@ namespace Service.UserService
         /// Name Date Comments
         /// longpv 3/30/2023 created
         /// </Modified>
-        public IEnumerable<User> GetUsers()
+        public ResponseUser GetPagging(int pageIndex, int pageSize)
         {
-           var  users =  _userRepository.GetAll().Where(x=>x.IsDelete == false);
-            return users;
+            var response = new ResponseUser();
+            var userAll = GetAll().ToList();
+            var users = userAll.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            var totalItems = userAll.Count;
+            var totalPages = Math.Ceiling((double)totalItems / pageSize);
+            response.Users = users;
+            response.TotalItems = totalItems;
+            response.TotalPages = totalPages;
+                
+           return response;
         }
+
 
         /// <summary>Thêm nhân viên</summary>
         /// <param name="user">The user.</param>
@@ -130,19 +157,24 @@ namespace Service.UserService
         /// Name Date Comments
         /// longpv 3/30/2023 created
         /// </Modified>
-        public User? InsertUser(User user)
-        {
-            var users = GetUsers();
+        public ResponseService<User> InsertUser(User user)
+        {   
+            var response = new ResponseService<User>();
+            var users = GetAll();
             var userExist = users.Where(x => x.LoginName == user.LoginName).ToList();
             if (userExist.Count > 0)
             {
-                return null;
+                response.Success = false;
+                response.Message = "Đã tồn tại user";
+                response.Data = null;
+                return response;
             }
             else
             {
                 user.Password = _md5.EncryptPassword(user.Password);
                 _userRepository.Insert(user);
-                return user;
+                response.Data = user;
+                return response;
             }
 
         }
@@ -159,19 +191,27 @@ namespace Service.UserService
         /// Name Date Comments
         /// longpv 3/30/2023 created
         /// </Modified>
-        public User? UpdateUser(User user)
+        public ResponseService<User> UpdateUser(User user)
         {
-            var users = GetUsers();
-            var userExist = users.Where(x => x.LoginName == user.LoginName).ToList();
-            if (userExist.Count > 0)
-            {
-                return null;
-            }
-            else
+            var response = new ResponseService<User>();
+            try
             {
                 _userRepository.Update(user);
-                return user;
+                response.Data = user;
+                return response;
+            }catch (Exception ex)
+            {
+                response.Success =false;
+                response.Message = ex.Message;
+                return response;
             }
+            
+        }
+
+        public  IEnumerable<User> GetAll()
+        {
+            var users = _userRepository.GetAll().Where(x => x.IsDelete == false).OrderBy(x => x.LoginName);
+            return users;
         }
     }
 }

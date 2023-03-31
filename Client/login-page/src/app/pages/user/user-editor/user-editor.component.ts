@@ -55,9 +55,9 @@ export class UserEditorComponent implements OnInit {
     newUser.email = this.user.email;
     newUser.isAdmin = this.user.isAdmin;
     if (this.user.id === 0) {
-      this.userService.addUser(newUser).subscribe((data) => {
+      this.userService.addUser(newUser).subscribe((data:any) => {
 
-        if (!data) {
+        if (data.message === 'Đã tồn tại user') {
           this.toastr.error('Tên đăng nhập đã tồn tại', 'Add user fail');
         } else {
 
@@ -73,13 +73,22 @@ export class UserEditorComponent implements OnInit {
     } else {
 
       newUser.id = this.user.id;
-      this.userService.updateUser(newUser).subscribe((data) => {
+      this.userService.updateUser(newUser).subscribe((data:any) => {
 
-        this.refreshList.emit();
-        this.toastr.success('Cập nhật nhân viên thành công', 'Update success', {
-          closeButton: true
-        });
-        form.resetForm();
+        console.log(data);
+        if(data.success){
+          this.refreshList.emit();
+          this.toastr.success('Cập nhật nhân viên thành công', 'Update success', {
+            closeButton: true
+          });
+          form.resetForm();
+        }else {
+          this.toastr.error('Cập nhật nhân viên thất bại', 'Update user fail', {
+            closeButton: true
+          });
+          form.resetForm();
+        }
+       
       }, (err) => {
         this.toastr.error('Cập nhật nhân viên thất bại', 'Update user fail', {
           closeButton: true

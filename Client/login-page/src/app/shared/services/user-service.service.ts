@@ -12,8 +12,9 @@ export class UserService{
     constructor(private http:HttpClient){
         
     }
-    getAllUser(){
-        return this.http.get<UserModel>(environment.apiUrl + '/api/User/get-all');
+    getUser(pageIndex:number,pageSize:number){
+      
+        return this.http.get<UserModel>(environment.apiUrl + '/api/User/get-all?'+ `pageIndex=${pageIndex}&pageSize=${pageSize}`);
     }
     addUser(user:UserModel){
         return this.http.post<string>(environment.apiUrl + '/api/User/add',user);
@@ -26,7 +27,7 @@ export class UserService{
     }
 
     getPagging(userSearch:UserSearch){
-        return this.http.post(environment.apiUrl + '/api/User/get-pagging',userSearch);
+        return this.http.post(environment.apiUrl + '/api/User/get-search',userSearch);
     }
     deleteMultiUser(ids:number[]){
         return this.http.post(environment.apiUrl + '/api/User/delete-multi',ids)

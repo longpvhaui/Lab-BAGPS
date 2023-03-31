@@ -152,15 +152,15 @@
                         border: #8BC36b;
                         height: 30px;
                         border: none;
-                        width: auto;
-                    }
-                   
+                        width: 80%;
+                        
+                    }       
                     input:focus {
                         transform: translateX(-2px);
                         border-radius: 5px;
-                        
+                        outline: none;
                     }
-
+               
                     .input-item {
                         background: #fff;
                         color: #333;

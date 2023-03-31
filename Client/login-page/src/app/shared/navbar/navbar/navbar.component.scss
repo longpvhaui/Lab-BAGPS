@@ -1,42 +1,4 @@
-/* Mobile width < 740 px; */
-@media screen and (max-width : 739px) {
-    .container-fluid {
-        margin: 0;
-    }
-    .phone-button{
-        width: 32px !important;
-        height: 32px !important;
-        .phone {
-           
-            display: none;
-        }
-        .dropdown-select p {
-            display: none;
-        }
-    }
-}
 
-/* 		Tablet width >= 740 and width <1024px */
-@media screen and (min-width:740px) and (max-width:1023px) {
-    .phone-button{
-        width: 32px !important;
-        height: 32px !important;
-        .phone {
-           
-            display: none;
-        }
-        .dropdown-select p {
-            display: none;
-        }
-    }
-    .dropdown-select p {
-        display: none;
-    }
-}
-
-@media screen and (min-width:1024px) {
-
-}
 
 .phone-button {
 	border-radius: 2rem;
@@ -105,4 +67,43 @@
             margin-left: 0;
         }
     }
+}
+/* Mobile width < 740 px; */
+@media screen and (max-width : 739px) {
+    .container-fluid {
+        margin: 0;
+    }
+    .phone-button{
+        width: 32px !important;
+        height: 32px !important;
+        .phone {
+           
+            display: none;
+        }
+        .dropdown-select p {
+            display: none;
+        }
+    }
+}
+
+/* 		Tablet width >= 740 and width <1024px */
+@media screen and (min-width:740px) and (max-width:1023px) {
+    .phone-button{
+        width: 32px !important;
+        height: 32px !important;
+        .phone {
+           
+            display: none;
+        }
+        .dropdown-select p {
+            display: none;
+        }
+    }
+    .dropdown-select p {
+        display: none;
+    }
+}
+
+@media screen and (min-width:1024px) {
+
 }

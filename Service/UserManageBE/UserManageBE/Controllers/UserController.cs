@@ -23,10 +23,10 @@ namespace UserManageBE.Controllers
         [Authorize]
         [HttpGet]
         [Route("get-all")]
-        public IActionResult GetAll() 
+        public IActionResult GetAll(int pageIndex, int pageSize)
         {
-            var users =  _userService.GetUsers();
-            return Ok(users);
+            var response = _userService.GetPagging(pageIndex,pageSize);
+            return Ok(response);
         }
 
         /// <summary>Tìm kiếm</summary>
@@ -40,12 +40,12 @@ namespace UserManageBE.Controllers
         /// </Modified>
         [Authorize]
         [HttpPost]
-        [Route("get-pagging")]
-        public IActionResult GetPagging(SearchModel model) 
+        [Route("get-search")]
+        public IActionResult GetPagging(SearchModel model)
         {
-        
-            var user = _userService.GetPaggingAndSearch(model);
-            return Ok(user);
+
+           var response = _userService.GetUserSearch(model);
+            return Ok(response);
         }
 
         /// <summary>Thêm nhân viên</summary>
@@ -92,8 +92,8 @@ namespace UserManageBE.Controllers
             var currUser = _userService.GetUser(user.Id);
             if(currUser != null)
             {
-                currUser.LoginName = user.LoginName;
-                currUser.Password = user.Password;
+    
+
                 currUser.Name = user.Name;
                 currUser.Gender = user.Gender;
                 currUser.Email = user.Email;

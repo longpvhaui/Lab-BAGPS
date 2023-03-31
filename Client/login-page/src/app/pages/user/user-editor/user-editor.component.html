@@ -19,16 +19,16 @@
 
         <div class="col-md-6">
             <label for="inputLoginName" class="col-sm-3 col-form-label">Tên đăng nhập * </label>
-            <input type="text" [(ngModel)]="user.loginName" class="form-control" id="txtLogName" name="loginName" required pattern="[^\s]{1,50}" maxlength="50">
+            <input type="text" [(ngModel)]="user.loginName" class="form-control" id="txtLogName" name="loginName" required pattern="[^\s]{1,50}" maxlength="50" [disabled]="user.id != 0">
             <div *ngIf="checksubmit && userForm.controls['loginName'].invalid" class="alert alert-danger"> 
-                <div *ngIf="userForm.controls['loginName']?.errors?.['required']">
-                 Tên đăng nhập bắt buộc
+                  <div *ngIf="userForm.controls['loginName']?.errors?.['required']">
+                        Tên đăng nhập bắt buộc
                   </div>
                   <div *ngIf="userForm.controls['loginName']?.errors?.['pattern']">
-                    Tên đăng nhập sai định dạng
+                        Tên đăng nhập sai định dạng
                   </div>
                   <div *ngIf="userForm.controls['loginName']?.errors?.['maxlength']">
-                    Tên đăng nhập quá dài
+                        Tên đăng nhập quá dài
                   </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 <div class="slider">
     <div class="slide" [ngStyle]="{ 'background-image': getCurrentSlideUrl(),
-                    'min-height' : '650px' }">
+                    'min-height' : '750px' }">
         <div class="dotsContainer">
             <ng-container *ngFor="let slide of slides; let slideIndex = index">
                 <div class="dot" *ngIf="slide.IsActived == 1 && slide.IsDeleted == 0 && slide.TypeOfNews == 1"

@@ -16,12 +16,13 @@ namespace Service.UserService
     /// </Modified>
     public interface IUserService
     {
-        IEnumerable<User> GetUsers();
+        ResponseUser GetPagging(int pageIndex,int pageSize);
+        IEnumerable<User> GetAll();
         User GetUser(int id);
-        User InsertUser(User user);
-        User UpdateUser(User user);
-        User DeleteUser(int id);
-        IEnumerable<User> GetPaggingAndSearch(SearchModel model);
+        ResponseService<User> InsertUser(User user);
+        ResponseService<User> UpdateUser(User user);
+        ResponseService<User> DeleteUser(int id);
+        ResponseUser GetUserSearch(SearchModel model);
 
     }
 }

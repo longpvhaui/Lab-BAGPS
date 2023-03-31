@@ -1,65 +1,13 @@
-@media screen and (max-width : 768px) {
-    .download {
-        display: inline;
-        margin: 0 10px;
-        .btn-download {
-            margin-right: 10px;
-        }
-       
-    }
-    .branch-list {
-        flex-wrap: nowrap !important;
-    }
-    .logo-item {
-  
-        display: block;
-        justify-content: center;
-        margin-top: 1rem;
-    }
-    .container-fluid {
-        margin: 0;
-    }
-}
-@media screen and (min-width:768px) and (max-width:1023px) {
-    .download {
-        display: grid;
-        margin: 0 10px;
-        margin-bottom: 10px;
-        justify-content: end;
-    }
-    .logo-item {
-        display: flex;
-        justify-content: end;
-        align-items: center;
-        margin-bottom: 2rem;
-    }
-    .branch-list {
-        flex-wrap: nowrap !important;
-    }
-}
-@media screen and (min-width:1024px) {
-    .download {
-        display: grid;
-        margin: 0 10px;
-        margin-bottom: 10px;
-        justify-content: end;
-    } 
-    .logo-item {
-        display: flex;
-        justify-content: end;
-        align-items: center;
-        margin-bottom: 2rem;
-    }
-    
-}
+
 .footer{
     display: flex;
-
+    position: absolute;
         .branch-list {
             display: flex;
             justify-content: space-between;
             scroll-snap-type: both proximity;
             overflow-x: scroll;
+            flex-wrap: nowrap !important;
             width: 100%;
             &::-webkit-scrollbar {
                 height: 0.5rem !important;
@@ -120,4 +68,58 @@
 	background-color: transparent;
 	border-radius: 1rem;
 	border: none;
+}
+@media screen and (max-width : 768px) {
+    .download {
+        display: inline;
+        margin: 0 10px;
+        .btn-download {
+            margin-right: 10px;
+        }
+       
+    }
+    .branch-list {
+        flex-wrap: nowrap !important;
+    }
+    .logo-item {
+  
+        display: block;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    .container-fluid {
+        margin: 0;
+    }
+}
+@media screen and (min-width:768px) and (max-width:1023px) {
+    .download {
+        display: grid;
+        margin: 0 10px;
+        margin-bottom: 10px;
+        justify-content: end;
+    }
+    .logo-item {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    .branch-list {
+        flex-wrap: nowrap !important;
+    }
+}
+@media screen and (min-width:1024px) {
+    .download {
+        display: grid;
+        margin: 0 10px;
+        margin-bottom: 10px;
+        justify-content: end;
+    } 
+    .logo-item {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+    
 }

@@ -3,5 +3,6 @@ export class UserSearch {
     fromDate! :string;
     toDate!:string;
     gender!: string;
-
+    pageIndex!:number;
+    pageSize!:number;
 }
