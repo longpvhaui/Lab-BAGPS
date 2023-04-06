@@ -62,6 +62,10 @@ namespace UserManageBE.Controllers
         [Route("add")]
         public  IActionResult AddUser(User user)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             user.CreatedDate = DateTime.Now;
             if(user == null)
             {
@@ -85,23 +89,15 @@ namespace UserManageBE.Controllers
         [Route("edit")]
         public IActionResult EditUser(User user)
         {
-            if(user == null)
+            if(!ModelState.IsValid)
             {
                 return BadRequest();
             }
-            var currUser = _userService.GetUser(user.Id);
-            if(currUser != null)
-            {
+           
     
 
-                currUser.Name = user.Name;
-                currUser.Gender = user.Gender;
-                currUser.Email = user.Email;
-                currUser.Birthday = user.Birthday;
-                currUser.Phone = user.Phone;
-                var result = _userService.UpdateUser(currUser);
-                return Ok(result);
-            }else return BadRequest();
+                var result = _userService.UpdateUser(user);
+             
         }
 
         /// <summary>Xóa nhân viên</summary>
@@ -116,12 +112,14 @@ namespace UserManageBE.Controllers
         [Route("delete")]
         public IActionResult DeleteUser(int id)
         {
-            var currUser = _userService.GetUser(id);
-            if(currUser != null)
+           
+                var result = _userService.DeleteUser(id);
+            if (result.Success)
             {
-                var result = _userService.DeleteUser(currUser.Id);
-                return Ok(result);
-            }else return NotFound();
+                return Ok(result.Message);
+            }else return BadRequest(result.Message);
+                
+           
 
         }
 

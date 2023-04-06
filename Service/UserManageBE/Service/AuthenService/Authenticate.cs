@@ -38,9 +38,9 @@ namespace Service.AuthenService
         /// Name Date Comments
         /// longpv 3/30/2023 created
         /// </Modified>
-        public User? CheckLogin(LoginModel loginModel)
+        public User CheckLogin(LoginModel loginModel)
         {
-            var users =  _userService.GetUsers();
+            var users = _userService.GetAll();
             var pass = _md5.EncryptPassword(loginModel.Password);
             var user = users.Where(x => x.LoginName == loginModel.LoginName && x.Password == pass).FirstOrDefault();
             if (user != null) return user;
