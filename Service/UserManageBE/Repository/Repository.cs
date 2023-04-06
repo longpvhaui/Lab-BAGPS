@@ -39,11 +39,19 @@ namespace Repository
             _context.SaveChanges();
         }
 
-    
+        /// <summary>Lấy toàn bộ dữ liệu </summary>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        /// <Modified>
+        /// Name Date Comments
+        /// longpv 3/30/2023 created
+        /// </Modified>
         public IEnumerable<T> GetAll()
         {
             return entities.AsEnumerable();
         }
+
 
         /// <summary>Lấy dữ liệu theo id.</summary>
         /// <param name="id">The identifier.</param>
