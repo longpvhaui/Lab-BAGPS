@@ -39,7 +39,7 @@ namespace Service.UserService
         public ResponseService<User> DeleteUser(int id)
         {
             var response = new ResponseService<User>();
-            User user = GetUser(id);
+            var user = GetUser(id);
             if (user != null)
             {
                 user.IsDelete = true;
@@ -52,7 +52,7 @@ namespace Service.UserService
             {
                 response.Success = false;
                 response.Message = "Delete Fail";
-                response.Data = null;
+               
                 return response;
             }
             
@@ -161,12 +161,12 @@ namespace Service.UserService
         {   
             var response = new ResponseService<User>();
             var users = GetAll();
-            var userExist = users.Where(x => x.LoginName == user.LoginName).ToList();
-            if (userExist.Count > 0)
+            var userExist = users.FirstOrDefault(x => x.LoginName == user.LoginName);
+            if (userExist != null)
             {
                 response.Success = false;
                 response.Message = "Đã tồn tại user";
-                response.Data = null;
+
                 return response;
             }
             else
@@ -176,6 +176,7 @@ namespace Service.UserService
                 response.Data = user;
                 return response;
             }
+         
 
         }
 
@@ -196,8 +197,19 @@ namespace Service.UserService
             var response = new ResponseService<User>();
             try
             {
-                _userRepository.Update(user);
-                response.Data = user;
+                var currUser = _userRepository.GetById(user.Id);
+                if (currUser != null)
+                {
+                    currUser.Name = user.Name;
+                    currUser.Gender = user.Gender;
+                    currUser.Email = user.Email;
+                    currUser.Birthday = user.Birthday;
+                    currUser.Phone = user.Phone;
+                    _userRepository.Update(user);
+                    response.Data = user;
+                    response.Success = true;
+                }
+                else response.Message = "Not Found User";
                 return response;
             }catch (Exception ex)
             {

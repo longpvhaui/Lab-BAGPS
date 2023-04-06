@@ -21,6 +21,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
 import { AuthenService, AuthGuardService } from './shared/services/authen.service';
 import { ToastNoAnimationModule, ToastrModule } from 'ngx-toastr';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { SampleComponent } from './sample/sample.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     UserComponent,
     UserShowComponent,
     UserEditorComponent,
+    SampleComponent,
   ],
   imports: [
     BrowserModule,
