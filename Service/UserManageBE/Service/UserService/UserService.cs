@@ -71,6 +71,10 @@ namespace Service.UserService
         public ResponseUser GetUserSearch(SearchModel model)
         {
             var response = new ResponseUser();
+            if(model.PageSize <= 0 || model.PageIndex <= 0)
+            {
+                return null;
+            }
             var users = GetAll();
 
             if (!string.IsNullOrEmpty(model.SearchText))
@@ -135,6 +139,10 @@ namespace Service.UserService
         /// </Modified>
         public ResponseUser GetPagging(int pageIndex, int pageSize)
         {
+            if(pageIndex <= 0 || pageSize <= 0)
+            {
+                return null;
+            }
             var response = new ResponseUser();
             var userAll = GetAll().ToList();
             var users = userAll.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
@@ -174,6 +182,8 @@ namespace Service.UserService
                 user.Password = _md5.EncryptPassword(user.Password);
                 _userRepository.Insert(user);
                 response.Data = user;
+                response.Success = true;
+                response.Message = "Success";
                 return response;
             }
          
@@ -207,6 +217,7 @@ namespace Service.UserService
                     currUser.Phone = user.Phone;
                     _userRepository.Update(user);
                     response.Data = user;
+                    response.Message = "Success";
                     response.Success = true;
                 }
                 else response.Message = "Not Found User";
@@ -222,7 +233,7 @@ namespace Service.UserService
 
         public  IEnumerable<User> GetAll()
         {
-            var users = _userRepository.GetAll().Where(x => x.IsDelete == false).OrderBy(x => x.LoginName);
+            var users = _userRepository.GetAll().Where(x => x.IsDelete == false).OrderByDescending(x => x.CreatedDate);
             return users;
         }
     }

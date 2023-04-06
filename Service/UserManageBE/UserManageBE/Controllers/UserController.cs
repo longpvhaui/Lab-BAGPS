@@ -72,7 +72,11 @@ namespace UserManageBE.Controllers
                 return BadRequest();
             }
             var result  = _userService.InsertUser(user);
-            return Ok(result);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else return BadRequest(result);
         }
 
         /// <summary>Cập nhật nhân viên</summary>
@@ -93,11 +97,12 @@ namespace UserManageBE.Controllers
             {
                 return BadRequest();
             }
-           
-    
-
-                var result = _userService.UpdateUser(user);
-             
+            var result = _userService.UpdateUser(user);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else return BadRequest(result);
         }
 
         /// <summary>Xóa nhân viên</summary>
@@ -116,8 +121,8 @@ namespace UserManageBE.Controllers
                 var result = _userService.DeleteUser(id);
             if (result.Success)
             {
-                return Ok(result.Message);
-            }else return BadRequest(result.Message);
+                return Ok(result);
+            }else return BadRequest(result);
                 
            
 
